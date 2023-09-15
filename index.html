@@ -1,0 +1,71 @@
+<head>
+    <script src="https://telegram.org/js/telegram-web-app.js"></script>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            overflow: hidden;
+            display: grid;
+            grid-template-rows: 1fr 1fr 1fr;
+            grid-template-columns: 1fr 1fr;
+            height: 100vh;
+            width: 100vw;
+            touch-action: none !important;
+            background-color: darkgray;
+        }
+
+        .box {
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+        }
+
+        .box img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+        }
+    </style>
+</head>
+<script>
+    window.addEventListener("touchmove",(e)=>{
+        e.preventDefault()
+    })
+</script>
+<body>
+    <div class="box" onclick = "goToCal()">
+        <img src="/images/grad_stick_figure.png" alt="Image 1">
+    </div>
+    <div class="box" id = "box2" >
+        
+    </div>
+    <div class="box" >
+    </div>
+    <div class="box" >
+    </div>
+    <div class="box" >
+    </div>
+    <div class="box" >
+    </div>
+    
+    <script>
+        function goToCal(){window.location = "/cal2.html"}
+        elem = document.getElementById("box2").innerHTML = window.Telegram.WebApp.colorScheme
+    </script>
+</body>
+<script async>
+async function submitform(){
+    try{
+        const name_value = document.getElementById("input_name").value
+        const content = await fetch(
+                    `https://telebot-delta.vercel.app/api/check_all_open_requests?name=${name_value}`,
+                    { headers: { Accept: "*/*" }, method: "GET" }
+                )
+        const content2 = await content.json()
+        const content3 = content2.map((item)=>{return JSON.stringify(item)})
+        document.getElementById("testdiv").innerHTML = content3
+    }catch(error){
+        document.getElementById("testdiv").innerHTML = "fail"
+    }
+}
+</script>

@@ -1,0 +1,132 @@
+<head>
+    <style>
+        .unselectable {
+            user-select: none;
+            touch-action: none !important;
+        }
+        body {
+            touch-action: none !important;
+            background-color: darkgray;
+        }
+        .calendar {
+            width: 90%;
+            table-layout: fixed;
+            border-collapse: collapse;
+            margin: auto;
+            color:white;
+            touch-action: none !important;
+        }
+    </style>
+    <script>
+        var active_column = -1
+        var most_recent_active_elem = null
+        // document.addEventListener("touchstart",(e)=>{
+        //     const cx = e.touches[0].clientX
+        //     const cy = e.touches[0].clientY
+        //     const elem = document.elementFromPoint(cx,cy)
+        //     most_recent_active_elem = elem
+        //     if (elem.id.slice(0,5) == "event"){
+        //         active_column = Math.floor(Number(elem.id.slice(5,8)),7)
+        //         if (elem.style.backgroundColor != "green"){
+        //             elem.style.backgroundColor = "green"
+        //         } else {
+        //             elem.style.backgroundColor = "darkgray"
+        //         }
+        //     }
+        // })
+        // document.addEventListener("touchmove",(e)=>{
+        //     const cx = e.touches[0].clientX
+        //     const cy = e.touches[0].clientY
+        //     const elem = document.elementFromPoint(cx,cy)
+        //     if (elem != most_recent_active_elem){
+        //         if (elem.id.slice(0,5) == "event"){
+        //             if (Math.floor(Number(elem.id.slice(5,8)),7) == active_column){
+        //                 most_recent_active_elem = elem
+        //                 if (elem.style.backgroundColor != "green"){
+        //                     elem.style.backgroundColor = "green"
+        //                 } else {
+        //                     elem.style.backgroundColor = "darkgray"
+        //                 } 
+        //             }
+        //         }
+        //     }
+        // },true)
+    </script>
+</head>
+<body style="touch-action: none !important;">
+    <div>testing</div>
+    <table class = "calendar unselectable">
+        <thead>
+            <tr>
+                <th>Mon</th><th>Tues</th><th>Wed</th><th>Thurs</th>
+                <th>Fri</th><th>Sat</th><th>Sun</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr>
+                <td id = "event001" class = "event unselectable">8am</td>
+            </tr>
+            <tr>
+                <td id = "event002" class = "event unselectable">9am</td>
+            </tr>
+            <tr>
+                <td id = "event002" class = "event unselectable">10am</td>
+            </tr>
+            <tr>
+                <td id = "event002" class = "event unselectable">11am</td>
+            </tr>
+            <tr>
+                <td id = "event002" class = "event unselectable">12pm</td>
+            </tr>
+            <tr>
+                <td id = "event002" class = "event unselectable">1pm</td>
+            </tr>
+            <tr>
+                <td id = "event002" class = "event unselectable">2pm</td>
+            </tr>
+            <tr>
+                <td id = "event002" class = "event unselectable">3pm</td>
+            </tr>
+            <tr>
+                <td id = "event002" class = "event unselectable">4pm</td>
+            </tr>
+            <tr>
+                <td id = "event002" class = "event unselectable">5pm</td>
+            </tr>
+            <tr>
+                <td id = "event002" class = "event unselectable">6pm</td>
+            </tr>
+            <tr>
+                <td id = "event002" class = "event unselectable">7pm</td>
+            </tr>
+            <tr>
+                <td id = "event002" class = "event unselectable">8pm</td>
+            </tr>
+            <tr>
+                <td id = "event002" class = "event unselectable">9pm</td>
+            </tr>
+            <tr>
+                <td id = "event002" class = "event unselectable">10pm</td>
+            </tr>
+            <tr>
+                <td id = "event002" class = "event unselectable">11pm</td>
+            </tr>
+            <tr>
+                <td id = "event002" class = "event unselectable">12am</td>
+            </tr>
+
+        </tbody>
+    </table>
+</body>
+<script>
+function multiplyNode(node_list, count, deep) {
+    for (const elem of node_list){
+        for (var i = 1; i < count; i++) {
+            const copy = elem.cloneNode(deep);
+            const new_id = String(Number(elem.id.slice(5,8)) + (32*i)).padStart(3,'0')
+            copy.id = `event${new_id}`
+            elem.after(copy)
+        }}
+}
+multiplyNode(document.querySelectorAll(".event"), 7, true);
+</script>
